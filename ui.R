@@ -64,22 +64,24 @@ shinyUI(navbarPage("Navbar!",
                    
                    tabPanel("Comparison",
                             sidebarPanel(selectInput("choose", label = "Select Call Type",
-                                                     choices = list("Burglary" = "BURGLARY",
-                                                                    "Liquor" = "LIQUOR VIOLATIONS",
-                                                                    "Assaults" = "ASSAULTS",
-                                                                    "Robbery" = "ROBBERY",
-                                                                    "Narcotics" = "NARCOTICS COMPLAINTS", 
-                                                                    "Threats" = "THREATS, HARASSMENT",
-                                                                    "Homicide" = "HOMICIDE",
-                                                                    "Weapons" = "WEAPONS CALLS",
+                                                     choices = list("Assaults" = "ASSAULTS",
+                                                                    "Burglary" = "BURGLARY",
                                                                     "Car Prowl" = "CAR PROWL",
+                                                                    "Homicide" = "HOMICIDE",
+                                                                    "Liquor" = "LIQUOR VIOLATIONS",
+                                                                    "Narcotics" = "NARCOTICS COMPLAINTS",
+                                                                    "Prostitution" = "PROSTITUTION",
+                                                                    "Robbery" = "ROBBERY",
                                                                     "Shoplifting" = "SHOPLIFTING",
-                                                                    "Prostitution" = "PROSTITUTION"))
-                            ),
+                                                                    "Threats" = "THREATS, HARASSMENT",
+                                                                    "Weapons" = "WEAPONS CALLS"
+                                                                    )),
+                            
                             selectInput("whichtype", label = "Percentage Level",
-                                        choices = list("Limited English" = "limeng",
-                                                       "Free Lunches" = "free",
-                                                       "Single Parents" = "oneparent"
+                                        choices = list("Free Lunches" = "free",
+                                                       "Limited English" = "limeng",
+                                                       "Single Parents" = "oneparent"),
+                                        selected = "free"
                                         )),
                    mainPanel(leafletOutput("comparemap"))
                    ),

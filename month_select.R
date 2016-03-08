@@ -15,6 +15,7 @@ summary_bar <- plot_ly(sorted_our_2012, type = "bar",
                         y = c(sorted_our_2012$total_calls)) %>% 
   layout(title = "Call Type", 
          xaxis = list(title = "Call Type"),
-         yaxis = list(title = "Total Calls")) %>% 
+         yaxis = list(title = "Total Calls"),
+         margin = list("b" = 100)) %>% 
 return()
 }

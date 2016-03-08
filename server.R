@@ -7,12 +7,14 @@ library(leaflet)
 shinyServer(function(input, output) {
   output$mymap2 <- renderLeaflet({
     selected_call <- choose_call_group(input$select)
-    leaflet(width = 10, height = 10) %>%
+    leaflet() %>%
       addTiles() %>% 
       fitBounds(min(call_info$Longitude), min(call_info$Latitude), 
                 max(call_info$Longitude), max(call_info$Latitude)) %>% 
       addCircleMarkers(lng = selected_call$Longitude, lat = selected_call$Latitude,
-                       radius = .5)
+                       color = "blue",
+                       radius = 3,
+                       stroke = FALSE)
   })
   
   output$bargraph <- renderPlotly({
@@ -21,12 +23,16 @@ shinyServer(function(input, output) {
   
   output$mymap <- renderLeaflet({
     selectedSchoolLevel <- selectSchoolLevel(input$selectlevel)
-    leaflet(width = 10, height = 10) %>%
+    leaflet() %>%
       addTiles() %>%
       fitBounds(min(schoolData$longitude), min(schoolData$latitude),
                 max(schoolData$longitude), max(schoolData$latitude)) %>%
       addCircleMarkers(lng = selectedSchoolLevel$longitude, lat = selectedSchoolLevel$latitude,
-                       radius = 5)
+                       color = "red",
+                       fillOpacity = .6,
+                       radius = 5,
+                       stroke = FALSE,
+                       popup = schoolData$School.Name)
   })
   
   output$schoolDataChart <- renderPlotly ({
@@ -56,19 +62,32 @@ shinyServer(function(input, output) {
       xaxis = (title = "hi"),
       name = "Number of Percentage"
     )
-    layout(numberOfFreeLunches, barmode = "stack", xaxis = x, yaxis = y, title = title)
+    layout(numberOfFreeLunches, 
+           barmode = "stack", 
+           xaxis = x, yaxis = y, 
+           title = title,
+           margin = list("b" = 150))
   })
   
   output$comparemap <- renderLeaflet({
     selected_call <- choose_call_group(input$choose)
     selected_sort <- make_choice(input$whichtype)
+    percentage <- eval(parse(text = input$whichtype), selected_sort)
     leaflet() %>%
       addTiles() %>% 
       fitBounds(min(call_info$Longitude), min(call_info$Latitude), 
                 max(call_info$Longitude), max(call_info$Latitude)) %>% 
       addCircleMarkers(lng = selected_call$Longitude, lat = selected_call$Latitude,
-                       radius = .5, color = "blue") %>% 
+                       radius = 3, 
+                       color = "blue", 
+                       stroke = FALSE, 
+                       fillOpacity = .5,
+                       selected_call) %>% 
       addCircleMarkers(lng = schoolData$longitude, lat = schoolData$latitude,
-                       radius = 3, color = "red", fillOpacity = 3)
+                       radius = percentage * 10, 
+                       color = "red", 
+                       stroke = FALSE,
+                       fillOpacity = .8,
+                       popup = paste0(schoolData$School.Name, " ", round(percentage * 100, 3), "%"))
   })
 })
