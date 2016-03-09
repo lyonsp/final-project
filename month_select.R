@@ -1,5 +1,8 @@
 library(plotly)
 library(dplyr)
+only_2012 <- read.csv("only_2012.csv")
+call_info <- read.csv("call_info.csv")
+
 our_only_2012 <- filter(only_2012, grepl("BURGLARY|LIQUOR VIOLATIONS|
                                          ASSAULTS|ROBBERY|NARCOTICS COMPLAINTS|
                                          THREATS, HARASSMENT|HOMICIDE|WEAPONS CALLS|
