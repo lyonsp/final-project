@@ -8,3 +8,4 @@ make_choice <- function(choice) {
   newschoolData <- schoolData %>% select_(choice)
   return(newschoolData)
 }
+
