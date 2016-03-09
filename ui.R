@@ -4,12 +4,13 @@ library(shiny)
 library(dplyr)
 library(leaflet)
 
-shinyUI(navbarPage("Navbar!",
+shinyUI(navbarPage("Welcome",
                    tabPanel("Intro",
                             includeMarkdown("testingOut.Rmd")),
                    tabPanel("911 Calls",
                             titlePanel("911 Call Data"),
-                            sidebarPanel(selectInput("select", label = "Select Call Type",
+                            sidebarPanel(helpText("Select specific type of incident."),
+                                         selectInput("select", label = "Select Call Type",
                                                      choices = list("Burglary" = "BURGLARY",
                                                                     "Liquor" = "LIQUOR VIOLATIONS",
                                                                     "Assaults" = "ASSAULTS",
@@ -23,8 +24,10 @@ shinyUI(navbarPage("Navbar!",
                                                                     "Prostitution" = "PROSTITUTION"))
                                          ),
                             mainPanel("Locations of 911 Calls",
-                                      leafletOutput("mymap2")),
-                            sidebarPanel(selectInput("selectx", label = "Select Month",
+                                      leafletOutput("mymap2"),
+                                      br()),
+                            sidebarPanel(helpText("View incidents for a specific month."),
+                                         selectInput("selectx", label = "Select Month",
                                                      choices = list("Total" = "2012",
                                                                     "January" = "^01/", 
                                                                     "February" = "^02/",
@@ -44,16 +47,19 @@ shinyUI(navbarPage("Navbar!",
                             ),
                    
                    tabPanel("Seattle Schools",
-                            sidebarPanel(
+                            titlePanel("Seattle School Data"),
+                            sidebarPanel(helpText("View schools of chosen level."),
                               selectInput("selectlevel", label = "Select School Level",
                                           choices = list("All" = "all",
                                                           "Elementary School" = "Elementary",
                                                          "Middle School" = "Middle School",
                                                          "High School" = "High School"))
                               ),
-                            mainPanel(leafletOutput("mymap")),
+                            mainPanel("School Locations",
+                                      leafletOutput("mymap"),
+                                      br()),
                             
-                            sidebarPanel(
+                            sidebarPanel(helpText("View percentages for selected option."),
                               selectInput("school_var", label = "Percentage Level",
                                           choices = list("Free Lunches" = "Free_Lunches",
                                                          "Limited English" = "Limited_English",
@@ -64,7 +70,9 @@ shinyUI(navbarPage("Navbar!",
                             ),
                    
                    tabPanel("Comparison",
-                            sidebarPanel(selectInput("choose", label = "Select Call Type",
+                            titlePanel("911 Call and Seattle School Comparison"),
+                            sidebarPanel(helpText("Select specific type of incident."),
+                                         selectInput("choose", label = "Select Call Type",
                                                      choices = list("Assaults" = "ASSAULTS",
                                                                     "Burglary" = "BURGLARY",
                                                                     "Car Prowl" = "CAR PROWL",
@@ -77,14 +85,14 @@ shinyUI(navbarPage("Navbar!",
                                                                     "Threats" = "THREATS, HARASSMENT",
                                                                     "Weapons" = "WEAPONS CALLS"
                                                                     )),
-                            
+                                         helpText("View percentages for selected option."),
                             selectInput("whichtype", label = "Percentage Level",
                                         choices = list("Free Lunches" = "Percent_Free_Lunch",
                                                        "Limited English" = "Percent_Limited_English",
                                                        "Single Parents" = "Percent_One_Parent_Homes"),
                                         selected = "free"
                                         )),
-                   mainPanel(leafletOutput("comparemap"))
+                   mainPanel(leafletOutput("comparemap", height = 800, width = 900))
                    ),
                    tabPanel("Conclusion")
                             )

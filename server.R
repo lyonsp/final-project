@@ -9,8 +9,8 @@ shinyServer(function(input, output) {
     selected_call <- choose_call_group(input$select)
     leaflet() %>%
       addTiles() %>% 
-      fitBounds(min(call_info$Longitude), min(call_info$Latitude), 
-                max(call_info$Longitude), max(call_info$Latitude)) %>% 
+      fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
+                max(only_2012$Longitude), max(only_2012$Latitude)) %>% 
       addCircleMarkers(lng = selected_call$Longitude, lat = selected_call$Latitude,
                        color = "blue",
                        radius = 3,
@@ -30,7 +30,7 @@ shinyServer(function(input, output) {
       addCircleMarkers(lng = selectedSchoolLevel$longitude, lat = selectedSchoolLevel$latitude,
                        color = "red",
                        fillOpacity = .6,
-                       radius = 5,
+                       radius = (eval(parse(text = input$school_var), selectedSchoolLevel) / selectedSchoolLevel$Total_Students) * 10,
                        stroke = FALSE,
                        popup = schoolData$School_Name)
   })
@@ -45,8 +45,9 @@ shinyServer(function(input, output) {
     title <- list(
       title = "Number of Students vs Number of Free Lunches"
     )
+    specificSchoolLevel <- selectSchoolLevel(input$selectlevel)
     
-    numberOfStudents <- plot_ly(schoolData,
+    numberOfStudents <- plot_ly(specificSchoolLevel,
                                 x = School_Name,
                                 y = Total_Students,
                                 name = "Number Of Students",
@@ -57,13 +58,13 @@ shinyServer(function(input, output) {
       numberOfStudents,
       x = School_Name,
       y  = eval(parse(text = input$school_var)),
-      title = "blah",
-      xaxis = (title = "hi"),
-      name = "Number of Percentage"
+      #title = "blah",
+      #xaxis = (title = "hi"),
+      name = paste0("Number of ", input$school_var)
     ) %>%
     layout(barmode = "stack", 
            xaxis = x, yaxis = y, 
-           title = "Test",
+           title = paste0("Number of Students With and Without ", input$school_var),
            margin = list("b" = 150))
   })
   
@@ -73,8 +74,8 @@ shinyServer(function(input, output) {
     percentage <- eval(parse(text = input$whichtype), selected_sort)
     leaflet() %>%
       addTiles() %>% 
-      fitBounds(min(call_info$Longitude), min(call_info$Latitude), 
-                max(call_info$Longitude), max(call_info$Latitude)) %>% 
+      fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
+                max(only_2012$Longitude), max(only_2012$Latitude)) %>% 
       addCircleMarkers(lng = selected_call$Longitude, lat = selected_call$Latitude,
                        radius = 3, 
                        color = "blue", 
@@ -82,10 +83,12 @@ shinyServer(function(input, output) {
                        fillOpacity = .5,
                        selected_call) %>% 
       addCircleMarkers(lng = schoolData$longitude, lat = schoolData$latitude,
-                       radius = percentage * 10, 
+                       radius = percentage * 12, 
                        color = "red", 
                        stroke = FALSE,
                        fillOpacity = .8,
-                       popup = paste0(schoolData$School_Name, " ", round(percentage * 100, 3), "%"))
+                       popup = paste0(schoolData$School_Name, " ", round(percentage * 100, 3), "%")) %>% 
+      addLegend(position = 'topright', colors = "blue", labels = "911 Calls", opacity = 0.8) %>% 
+      addLegend(position = 'topright', colors = "red", labels = "Schools", opacity = 0.8)
   })
 })
