@@ -47,16 +47,17 @@ shinyUI(navbarPage("Navbar!",
                             sidebarPanel(
                               selectInput("selectlevel", label = "Select School Level",
                                           choices = list("All" = "all",
-                                            "Elementary School" = "Elementary",
+                                                          "Elementary School" = "Elementary",
                                                          "Middle School" = "Middle School",
                                                          "High School" = "High School"))
                               ),
                             mainPanel(leafletOutput("mymap")),
+                            
                             sidebarPanel(
-                              selectInput("poop", label = "Percentage Level",
-                                          choices = list("Limited English" = "nlimeng",
-                                                         "Free Lunches" = "nfree",
-                                                         "Single Parents" = "noneparent"
+                              selectInput("school_var", label = "Percentage Level",
+                                          choices = list("Free Lunches" = "Free_Lunches",
+                                                         "Limited English" = "Limited_English",
+                                                         "Single Parents" = "One_Parent_Homes"
                                           )
                               )),
                               mainPanel(plotlyOutput("schoolDataChart"))
@@ -78,9 +79,9 @@ shinyUI(navbarPage("Navbar!",
                                                                     )),
                             
                             selectInput("whichtype", label = "Percentage Level",
-                                        choices = list("Free Lunches" = "free",
-                                                       "Limited English" = "limeng",
-                                                       "Single Parents" = "oneparent"),
+                                        choices = list("Free Lunches" = "Percent_Free_Lunch",
+                                                       "Limited English" = "Percent_Limited_English",
+                                                       "Single Parents" = "Percent_One_Parent_Homes"),
                                         selected = "free"
                                         )),
                    mainPanel(leafletOutput("comparemap"))

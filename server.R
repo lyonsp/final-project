@@ -32,7 +32,7 @@ shinyServer(function(input, output) {
                        fillOpacity = .6,
                        radius = 5,
                        stroke = FALSE,
-                       popup = schoolData$School.Name)
+                       popup = schoolData$School_Name)
   })
   
   output$schoolDataChart <- renderPlotly ({
@@ -45,27 +45,25 @@ shinyServer(function(input, output) {
     title <- list(
       title = "Number of Students vs Number of Free Lunches"
     )
-    #schoolDataOrdered <- schoolData %>%  arrange(desc(eval(parse(text = input$poop))))
-    #schoolDataLevel <- schoolData %>%  filter(schoolLevel == eval(parse(text = input$school_Level)))
     
     numberOfStudents <- plot_ly(schoolData,
-                                x = School.Name,
-                                y = n,
+                                x = School_Name,
+                                y = Total_Students,
                                 name = "Number Of Students",
                                 type = "bar"
     )
     
     numberOfFreeLunches <- add_trace(
       numberOfStudents,
-      x = School.Name,
-      y  = eval(parse(text = input$poop)),
+      x = School_Name,
+      y  = eval(parse(text = input$school_var)),
+      title = "blah",
       xaxis = (title = "hi"),
       name = "Number of Percentage"
-    )
-    layout(numberOfFreeLunches, 
-           barmode = "stack", 
+    ) %>%
+    layout(barmode = "stack", 
            xaxis = x, yaxis = y, 
-           title = title,
+           title = "Test",
            margin = list("b" = 150))
   })
   
@@ -88,6 +86,6 @@ shinyServer(function(input, output) {
                        color = "red", 
                        stroke = FALSE,
                        fillOpacity = .8,
-                       popup = paste0(schoolData$School.Name, " ", round(percentage * 100, 3), "%"))
+                       popup = paste0(schoolData$School_Name, " ", round(percentage * 100, 3), "%"))
   })
 })

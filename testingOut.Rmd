@@ -2,4 +2,21 @@
 title: "testingOut"
 output: html_document
 ---
-Want to see if this works
+## Introduction
+In 2012, the Seattle Police Department received over 250,000 911 calls, ranging in severity from simple traffic violations to homicides. Seattle is also a city full of schools cultivating a new generation, and the environment in which they learn directly affects these young people. High crime rates can negatively affect students by creating an environment in which students are not able to focus on their studies, and instead are caught in a place not conducive to positive development.
+
+## Our Data
+This project explores both Seattle 911 calls and nearby Seattle school data. We chose eleven of the most impactful crimes, resulting in over 100,000 bits of data. Using this data we were able to plot a density map to show where certain crimes happen most frequently. The school data we used included percentages of students receiving free lunches, living in single parent homes, and having limited English proficiency. 
+
+We combined these data sets and generated a map that shows correlation between these sets of data. With this map we seek to explore the possible correlation between Seattle 911 calls and the living situations of students in the Seattle School District.
+
+## Our Goal
+We hope that our conclusions can help the Seattle School District direct support toward the higher risk schools and thus improve the educational opportunities for all students. Additionally, the Seattle Police Department can use our findings to focus attention on the schools in areas with both high profile incidents and areas with higher rates of crime.
+
+## For More Information... 
+The data sets we leveraged in this project can be found here:
+
+[Seattle 911 Calls](https://data.seattle.gov/Public-Safety/Seattle-Police-Department-911-Incident-Response/3k2p-39jp)
+
+[Seattle School District](http://www.indiscreetacumen.com/2015/06/seattle-schools-data-graphing-d3/)
+
