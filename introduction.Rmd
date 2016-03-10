@@ -2,7 +2,9 @@
 title: "testingOut"
 output: html_document
 ---
-## Introduction
+# <strong>Introduction</strong>
+
+## Background
 In 2012, the Seattle Police Department received over 250,000 911 calls, ranging in severity from simple traffic violations to homicides. Seattle is also a city full of schools cultivating a new generation, and the environments of these schools directly affect the way these young people learn. High crime rates can negatively affect students by creating an environment in which students are not able to focus on their studies, and instead are caught in a place not conducive to positive development.
 
 ## Our Data

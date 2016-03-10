@@ -6,7 +6,8 @@ library(leaflet)
 
 shinyServer(function(input, output) {
   output$mymap2 <- renderLeaflet({
-    selected_call <- choose_call_group(input$select)
+    selected_call <- choose_call_group(input$select) %>% group_by(Event.Clearance.Group) %>%
+      filter(grepl(input$selectx, Event.Clearance.Date)) 
     leaflet() %>%
       addTiles() %>% 
       fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
@@ -30,7 +31,7 @@ shinyServer(function(input, output) {
       addCircleMarkers(lng = selectedSchoolLevel$longitude, lat = selectedSchoolLevel$latitude,
                        color = "red",
                        fillOpacity = .6,
-                       radius = (eval(parse(text = input$school_var), selectedSchoolLevel) / selectedSchoolLevel$Total_Students) * 10,
+                       radius = (eval(parse(text = input$school_var), selectedSchoolLevel) / selectedSchoolLevel$Total_Students) * 15,
                        stroke = FALSE,
                        popup = schoolData$School_Name)
   })
@@ -51,16 +52,16 @@ shinyServer(function(input, output) {
                                 x = School_Name,
                                 y = Total_Students,
                                 name = "Number Of Students",
-                                type = "bar"
+                                type = "bar",
+                                marker = list(color = toRGB("cadetblue3"))
     )
     
     numberOfFreeLunches <- add_trace(
       numberOfStudents,
       x = School_Name,
       y  = eval(parse(text = input$school_var)),
-      #title = "blah",
-      #xaxis = (title = "hi"),
-      name = paste0("Number of ", input$school_var)
+      name = paste0("Number of ", input$school_var),
+      marker = list(color = toRGB("red"))
     ) %>%
     layout(barmode = "stack", 
            xaxis = x, yaxis = y, 

@@ -1,0 +1,19 @@
+---
+title: "conclusion"
+output: html_document
+---
+# <strong>Conclusion</strong>
+
+## 911 Data
+From our visualizations, we were able identify notable trends throughout our data. We decided to break down our data and focus in on high profile incidents, eliminating petty crimes such as traffic violations. From our more focused data set, we found that the most frequent incident type in 2012 was Liquor Violations. Fortunately, the most infrequent incident type for the year was Homicide. It is interesting to note that the number of high profile incidents stay fairly consistent from one month to the next. With the map, the highest crime areas become evident. Downtown Seattle accounts for the highest number of incidents for all call types, with other high crime areas being Beacon Hill, Rainier Valley, the University District, and Lake City.
+
+## Seattle School Data
+With our Seattle School data, we were able to compare the living situations of students studying in the Seattle School District. In our map, we plotted various data points with radii correlating to a school's student percentage of free lunches, single parent homes, and limited English. From our map and chart, it became evident that schools with a high percentage of students receiving free lunch also had higher percentages of single parent homes and limited English proficiency.
+
+## Comparison
+In order to compare both the 911 Call data and Seattle School data, we overlayed the various data points. This comparison map gives a clear representation of all of our data, and allows the user to explore many thing- such as compare a given school's English proficiency percentage to the number of robberies surrounding that school. From our map we noticed that schools with higher percentages of free lunches were generally located in proximity to high crime areas. For example, Gatzert Elementary, which has a relatively high percentage in every category (89.2% of students at Gatzert Elementary receive free lunches, 41.3% are of limited English proficiency, and 48.9% live in a single parent household) is located near Downtown Seattle, the area with the highest density of every type of call incident. We notice this trend in other high crime areas.
+
+## What's next?
+Our application presents a platform which allows a user to manipulate charts and maps in order to make his or her own discoveries and correlations about the given data. We believe that many user groups could find this project relevant and useful. One such group is the Seattle School District. Administration could utilize the possible correlations presented in our data in order to decide where to direct support and funding. The administration could use our data to identify schools in close proximity to high crime areas and create more before and after school programs for these schools in order to keep students at school in a safe environment.
+
+In conclusion, our goal is to provide the Seattle School District with an application that contains visualizations which can help the district administrators and individual school administrations create a safe environment conducive to learning. Schools cultivate the world's future generations and it is imparitive to provide these students with the proper environment to learn and succeed.
