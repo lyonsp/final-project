@@ -1,9 +1,9 @@
-schoolData <- read.csv("finalSchoolData.csv")
+schoolData <- read.csv("schoolData.csv")
 selectSchoolLevel <- function(gradeLevel) {
   if(gradeLevel == "all") {
     return(schoolData)
   } else {
-   selectedLevel <- schoolData %>% filter(schoolLevel == gradeLevel)
+   selectedLevel <- schoolData %>% filter(School_Level == gradeLevel)
     return(selectedLevel)
   }
 }

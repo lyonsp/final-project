@@ -3,14 +3,28 @@ library(plotly)
 library(shiny)
 library(dplyr)
 library(leaflet)
-
+markerColor <- ""
 shinyServer(function(input, output) {
+
+  #observe({
+    
+  #  if(input$whichtype == "Percent_Free_Lunch") {
+  #    markerColor = selectMarkerColor(lunchPercent$groupPercentLunch)
+  #  } else if (input$whichtype == "Percent_Limited_English") {
+  #    markerColor = selectMarkerColor(limitedPercent$groupPercentLimited)
+  #  } else {
+  #    markerColor = selectMarkerColor(singlePercent$groupPercentSingle)
+  #  }
+  #})
+  
+  pal <- colorFactor(c("navy", "red", "green", "black"), domain = limitedPercent$groupPercentLimited)
+                     
   output$mymap2 <- renderLeaflet({
     selected_call <- choose_call_group(input$select)
     leaflet() %>%
       addTiles() %>% 
-      fitBounds(min(call_info$Longitude), min(call_info$Latitude), 
-                max(call_info$Longitude), max(call_info$Latitude)) %>% 
+      fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
+                max(only_2012$Longitude), max(only_2012$Latitude)) %>% 
       addCircleMarkers(lng = selected_call$Longitude, lat = selected_call$Latitude,
                        color = "blue",
                        radius = 3,
@@ -45,8 +59,8 @@ shinyServer(function(input, output) {
     title <- list(
       title = "Number of Students vs Number of Free Lunches"
     )
-    
-    numberOfStudents <- plot_ly(schoolData,
+    specificSchool <- selectSchoolLevel(input$selectlevel)
+    numberOfStudents <- plot_ly(specificSchool,
                                 x = School_Name,
                                 y = Total_Students,
                                 name = "Number Of Students",
@@ -73,8 +87,8 @@ shinyServer(function(input, output) {
     percentage <- eval(parse(text = input$whichtype), selected_sort)
     leaflet() %>%
       addTiles() %>% 
-      fitBounds(min(call_info$Longitude), min(call_info$Latitude), 
-                max(call_info$Longitude), max(call_info$Latitude)) %>% 
+      fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
+                max(only_2012$Longitude), max(only_2012$Latitude)) %>% 
       addCircleMarkers(lng = selected_call$Longitude, lat = selected_call$Latitude,
                        radius = 3, 
                        color = "blue", 
