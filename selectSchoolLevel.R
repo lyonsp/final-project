@@ -8,4 +8,3 @@ selectSchoolLevel <- function(gradeLevel) {
   }
 }
 
-selectSchoolLevel("Elementary")
