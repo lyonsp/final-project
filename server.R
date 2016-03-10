@@ -5,9 +5,9 @@ library(dplyr)
 library(leaflet)
 
 shinyServer(function(input, output) {
-  output$mymap2 <- renderLeaflet({
-    selected_call <- choose_call_group(input$select) %>% group_by(Event.Clearance.Group) %>%
-      filter(grepl(input$selectx, Event.Clearance.Date)) 
+  output$incident_map <- renderLeaflet({
+    selected_call <- choose_call_group(input$select_call_type) %>% group_by(Event.Clearance.Group) %>%
+      filter(grepl(input$select_month, Event.Clearance.Date)) 
     leaflet() %>%
       addTiles() %>% 
       fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
@@ -18,12 +18,12 @@ shinyServer(function(input, output) {
                        stroke = FALSE)
   })
   
-  output$bargraph <- renderPlotly({
-    select_month(input$selectx)
+  output$incident_chart <- renderPlotly({
+    select_month(input$select_month)
   })
   
-  output$mymap <- renderLeaflet({
-    selectedSchoolLevel <- selectSchoolLevel(input$selectlevel)
+  output$school_map <- renderLeaflet({
+    selectedSchoolLevel <- selectSchoolLevel(input$school_level)
     leaflet() %>%
       addTiles() %>%
       fitBounds(min(schoolData$longitude), min(schoolData$latitude),
@@ -36,7 +36,7 @@ shinyServer(function(input, output) {
                        popup = schoolData$School_Name)
   })
   
-  output$schoolDataChart <- renderPlotly ({
+  output$school_chart <- renderPlotly ({
     x <- list(
       title = "School Names"
     )
@@ -46,7 +46,7 @@ shinyServer(function(input, output) {
     title <- list(
       title = "Number of Students vs Number of Free Lunches"
     )
-    specificSchoolLevel <- selectSchoolLevel(input$selectlevel)
+    specificSchoolLevel <- selectSchoolLevel(input$school_level)
     
     numberOfStudents <- plot_ly(specificSchoolLevel,
                                 x = School_Name,
@@ -70,9 +70,9 @@ shinyServer(function(input, output) {
   })
   
   output$comparemap <- renderLeaflet({
-    selected_call <- choose_call_group(input$choose)
-    selected_sort <- make_choice(input$whichtype)
-    percentage <- eval(parse(text = input$whichtype), selected_sort)
+    selected_call <- choose_call_group(input$comp_call_type)
+    selected_sort <- make_choice(input$comp_school_var)
+    percentage <- eval(parse(text = input$comp_school_var), selected_sort)
     leaflet() %>%
       addTiles() %>% 
       fitBounds(min(only_2012$Longitude), min(only_2012$Latitude), 
