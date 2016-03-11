@@ -3,10 +3,15 @@ library(plotly)
 library(shiny)
 library(dplyr)
 library(leaflet)
+library(shinythemes)
 
-shinyUI(navbarPage("Welcome",
+#Creates a navigation bar that allows a user to switch between different tabs in the Shiny App
+#Each tab contains visualizations or explanations about the data
+shinyUI(navbarPage(theme = shinytheme("flatly"), "Welcome",
+                   #Panel contains the introduction of datasets and packages
                    tabPanel("Introduction",
                             includeMarkdown("introduction.Rmd")),
+                   #Tab contains a map and chart of 911 data. Data can be manipulated with widgets on the side.
                    tabPanel("911 Calls",
                             titlePanel("911 Call Data"),
                             sidebarPanel(helpText("Select specific type of incident."),
@@ -45,7 +50,8 @@ shinyUI(navbarPage("Welcome",
                             ),
                             mainPanel(plotlyOutput("incident_chart"))
                             ),
-                   
+                   #Tab contains a map and chart of Seattle School data. 
+                   #Data can be manipulated with widgets on the side.
                    tabPanel("Seattle Schools",
                             titlePanel("Seattle School Data"),
                             sidebarPanel(helpText("View schools of chosen level."),
@@ -68,7 +74,8 @@ shinyUI(navbarPage("Welcome",
                               )),
                               mainPanel(plotlyOutput("school_chart"))
                             ),
-                   
+                   #Tab contains a map that overlays Seattle data and 911 Call Incidents. 
+                   #Data can be manipulated with widgets on the side.
                    tabPanel("Comparison",
                             titlePanel("911 Call and Seattle School Comparison"),
                             sidebarPanel(helpText("Select specific type of incident."),
