@@ -3,11 +3,12 @@ library(plotly)
 library(shiny)
 library(dplyr)
 library(leaflet)
-library(shinythemes)
 
-#Creates a navigation bar that allows a user to switch between different tabs in the Shiny App
-#Each tab contains visualizations or explanations about the data
-shinyUI(navbarPage(theme = shinytheme("flatly"), "Welcome",
+#This UI has a navigation bar that allows a user to switch between different tabs in the Shiny App
+#Each tab contains visualizations or explanations about the data 
+#Each tab also has widgets that allow a user to manipulate the visualizations.
+
+shinyUI(navbarPage(theme = "flatly.css", "Welcome",
                    #Panel contains the introduction of datasets and packages
                    tabPanel("Introduction",
                             includeMarkdown("introduction.Rmd")),
