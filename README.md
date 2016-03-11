@@ -1,6 +1,6 @@
 ## Shiny Application
 
-The completed Shiny application is accessible [here](https://kandrewc.shinyapps.io/SeattleSchoolsWith911incidents/)
+The completed Shiny application is accessible [here](https://kandrewc.shinyapps.io/SeattleSchoolAnd911Data/)
 
 ## Project Description: 
 
