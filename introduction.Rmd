@@ -33,3 +33,13 @@ We leveraged the following data sets in this project:
 
 [Seattle School District](http://www.indiscreetacumen.com/2015/06/seattle-schools-data-graphing-d3/)
 
+## Our Team
+
+- Andrew Kan
+
+- Nathan Lee
+
+- Peyton Lyons
+
+- Jill Aneri Shah
+
