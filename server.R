@@ -5,6 +5,11 @@ library(shiny)
 library(dplyr)
 library(leaflet)
 
+source("scripts/choose_call_group.R")
+source("scripts/make_choice.R")
+source("scripts/month_select.R")
+source("scripts/selectSchoolLevel.R")
+
 # This server uses input values to select particular information to be displayed on an output.
 shinyServer(function(input, output) {
   # Renders Leaflet map of 911 call incidents
